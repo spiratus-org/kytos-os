@@ -1,0 +1,12 @@
+# Identity Schema
+# 조직의 존재 방식. 무엇으로 살아있는가.
+# ---
+# version: 0.0
+# status: draft
+
+identity:
+  name: ~           # 조직의 이름
+  purpose: ~        # 존재 이유. 한 문장.
+  values: []        # 살아있게 하는 가치들
+  boundary: ~       # 경계. 무엇이 이 조직 안에 있고 밖에 있는가.
+  membrane: ~       # 투과 방식. 무엇을 들이고 무엇을 내보내는가.

@@ -1,0 +1,12 @@
+# Decision Schema
+# 결정의 방식. 어떻게 방향을 정하는가.
+# ---
+# version: 0.0
+# status: draft
+
+decision:
+  mode: ~           # 결정 방식. (합의/동의/위임/흐름)
+  quorum: ~         # 최소 참여. 결정에 필요한 조건.
+  reversibility: ~  # 되돌릴 수 있는가. 가역/불가역 구분.
+  record: ~         # 기록 방식. 결정이 어떻게 남는가.
+  review: ~         # 재검토 주기.

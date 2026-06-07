@@ -1,0 +1,12 @@
+# Resource Schema
+# 자원의 흐름. 무엇이 들어오고 나가는가.
+# ---
+# version: 0.0
+# status: draft
+
+resource:
+  types: []         # 자원의 종류. (시간/돈/공간/지식/에너지)
+  inflow: ~         # 들어오는 것. 어디서 무엇이 오는가.
+  outflow: ~        # 나가는 것. 어디로 무엇이 가는가.
+  commons: []       # 공유 자원. 함께 쓰는 것.
+  steward: ~        # 자원 관리 방식.

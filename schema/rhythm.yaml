@@ -1,0 +1,12 @@
+# Rhythm Schema
+# 흐름의 패턴. 어떻게 숨 쉬는가.
+# ---
+# version: 0.0
+# status: draft
+
+rhythm:
+  cycle: ~          # 기본 주기. (일/주/월/계절)
+  inhale: ~         # 들이쉬는 것. 에너지가 모이는 시간.
+  exhale: ~         # 내쉬는 것. 에너지가 나가는 시간.
+  rest: ~           # 쉬는 것. 멈추는 시간.
+  pulse: ~          # 고동. 정기적으로 함께 하는 것.

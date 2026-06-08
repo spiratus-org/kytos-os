@@ -1,0 +1,61 @@
+{
+  "_comment": "2026-06-08 손으로 그린 구조도의 디지털 변환. 노드 이름은 실제 조직/개인명이 아닌 구조 패턴을 나타냄.",
+  "_format": "node-link (D3.js compatible)",
+  "_source": "IMG_2214.JPG",
+
+  "node_types": {
+    "org": "조직 노드 — 검은 원. 개인 기여의 집합체.",
+    "individual": "개인 노드 — 흰 원. 지식과 기여의 주체.",
+    "future_org": "잠재적 조직 노드 — 점선으로 연결됨. 아직 형성되지 않은 가능성."
+  },
+
+  "edge_types": {
+    "active": "활성 연결 — 실선. permission granted.",
+    "potential": "잠재적 연결 — 점선. 가능성, 형성 중."
+  },
+
+  "nodes": [
+    { "id": "OA", "type": "org",        "label": "조직 A",  "cluster": "upper" },
+    { "id": "OB", "type": "org",        "label": "조직 B",  "cluster": "upper" },
+    { "id": "OC", "type": "org",        "label": "조직 C",  "cluster": "lower" },
+    { "id": "OD", "type": "org",        "label": "조직 D",  "cluster": "lower" },
+    { "id": "OF", "type": "future_org", "label": "조직 F?", "cluster": "left"  },
+
+    { "id": "I1",  "type": "individual", "label": "개인 1",  "bridge": false, "orgs": ["OA"] },
+    { "id": "I2",  "type": "individual", "label": "개인 2",  "bridge": false, "orgs": ["OA"] },
+    { "id": "I3",  "type": "individual", "label": "개인 3",  "bridge": false, "orgs": ["OB"] },
+    { "id": "I4",  "type": "individual", "label": "개인 4",  "bridge": true,  "orgs": ["OA", "OD"] },
+    { "id": "I5",  "type": "individual", "label": "개인 5",  "bridge": false, "orgs": ["OC"] },
+    { "id": "I6",  "type": "individual", "label": "개인 6",  "bridge": false, "orgs": ["OC"] },
+    { "id": "I7",  "type": "individual", "label": "개인 7",  "bridge": false, "orgs": ["OC"] },
+    { "id": "I8",  "type": "individual", "label": "개인 8",  "bridge": true,  "orgs": ["OC", "OD"] },
+    { "id": "I9",  "type": "individual", "label": "개인 9",  "bridge": false, "orgs": ["OD"] },
+    { "id": "I10", "type": "individual", "label": "개인 10", "bridge": false, "orgs": ["OD"] }
+  ],
+
+  "edges": [
+    { "source": "OA", "target": "OB", "type": "active",    "direction": "bidirectional" },
+    { "source": "OA", "target": "OD", "type": "active",    "direction": "bidirectional" },
+    { "source": "OC", "target": "OD", "type": "active",    "direction": "bidirectional" },
+
+    { "source": "I1",  "target": "OA", "type": "active",    "direction": "individual_to_org" },
+    { "source": "I2",  "target": "OA", "type": "active",    "direction": "individual_to_org" },
+    { "source": "I3",  "target": "OB", "type": "active",    "direction": "individual_to_org" },
+    { "source": "I4",  "target": "OA", "type": "active",    "direction": "individual_to_org" },
+    { "source": "I4",  "target": "OD", "type": "active",    "direction": "individual_to_org" },
+    { "source": "I5",  "target": "OC", "type": "active",    "direction": "individual_to_org" },
+    { "source": "I6",  "target": "OC", "type": "active",    "direction": "individual_to_org" },
+    { "source": "I7",  "target": "OC", "type": "active",    "direction": "individual_to_org" },
+    { "source": "I8",  "target": "OC", "type": "active",    "direction": "individual_to_org" },
+    { "source": "I8",  "target": "OD", "type": "active",    "direction": "individual_to_org" },
+    { "source": "I9",  "target": "OD", "type": "active",    "direction": "individual_to_org" },
+    { "source": "I10", "target": "OD", "type": "active",    "direction": "individual_to_org" },
+
+    { "source": "OC", "target": "OF", "type": "potential",  "direction": "org_to_org", "note": "잠재적 연결 — 그림에서 점선으로 표시됨" }
+  ],
+
+  "patterns": {
+    "bridge_nodes": ["I4", "I8"],
+    "note": "브릿지 노드는 여러 조직에 동시에 기여하는 개인. 조직 간 지식 흐름의 통로."
+  }
+}

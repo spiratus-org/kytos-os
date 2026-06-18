@@ -99,7 +99,8 @@ LIVING ORG OS PROJECT
 │   ├── 2-2  AI 해석 레이어 — 프롬프트 체계
 │   │         └── kytos-[조직명] shell command 구현
 │   │         └── /task-start / /task-end 스킬 구현
-│   └── 2-3  바디템플 / 현현에 직접 적용하며 검증
+│   ├── 2-3  바디템플 / 현현에 직접 적용하며 검증
+│   └── 2-4  kytos-data-template 배포 및 팀 온보딩
 │
 ├── 3. MVP RELEASE                        → 미정
 │   ├── 3-1  README + 철학 문서 정비
@@ -179,6 +180,11 @@ Individual Node      Org Node 이후 설계.
 | `docs/network-graph.json` | ✓ | 네트워크 구조 (기계 처리용) |
 | `schema/org-node.json` | → | 설계 시작 예정 |
 | `schema/individual-node.json` | → | Org Node 이후 |
+| `skills/task-start.md` | ✓ | 태스크 시작 스킬 |
+| `skills/task-end.md` | ✓ | 태스크 종료 + git 커밋 스킬 |
+| `kytos-data-template/` | ✓ | 개인 데이터 레포 템플릿 (Obsidian 볼트 포함) |
+| `install.sh` | ✓ | 스킬 설치 스크립트 |
+| `docs/setup.md` | ✓ | 설치 및 온보딩 가이드 |
 | `LICENSE` | ✓ | AGPL v3 |
 | `CLA.md` | ✓ | 기여자 라이센스 동의 |
 | `CONTRIBUTING.md` | ✓ | 기여 가이드 |

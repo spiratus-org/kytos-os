@@ -1,0 +1,17 @@
+{
+  "$schema": "https://raw.githubusercontent.com/spiratus-org/kytos-os/main/schema/individual-node.json",
+  "id": "did:kytos:YOUR_NAME",
+  "name": "이름",
+  "role": "역할 또는 직함",
+  "orgs": [
+    {
+      "id": "did:kytos:org:ORG_NAME",
+      "name": "조직 이름",
+      "joined": "YYYY-MM-DD",
+      "permission": "open"
+    }
+  ],
+  "created": "YYYY-MM-DD",
+  "data_location": "individual://",
+  "note": "이 파일은 나의 Individual Node 정체성 선언입니다. 공개 여부는 제가 결정합니다."
+}

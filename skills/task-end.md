@@ -1,8 +1,10 @@
 ---
-description: 태스크 종료 — 세션 추출 후 파일 업데이트 및 git 커밋
+description: 태스크 종료 — 세션 추출, frontmatter 자동 생성, git 커밋
 ---
 
-현재 세션을 마무리합니다. 의미 있는 것을 추출하고, 파일을 업데이트하고, git에 커밋합니다.
+현재 세션을 마무리합니다.
+
+---
 
 **1단계: 환경 확인**
 
@@ -10,55 +12,114 @@ description: 태스크 종료 — 세션 추출 후 파일 업데이트 및 git 
 echo $KYTOS_DATA_DIR
 ```
 
-`KYTOS_DATA_DIR`이 비어 있으면 멈추고 안내합니다.
+비어 있으면 멈추고 안내합니다: `docs/setup.md`의 4단계를 따라 설정해주세요.
+
+---
 
 **2단계: 세션 리뷰**
 
-이 세션 전체를 돌아보며 다음을 파악합니다:
-- 무엇을 했는가 (실제로 완료된 것)
+이 세션 전체를 읽고 다음을 파악합니다:
+- 무엇이 완료됐는가
 - 어떤 결정이 내려졌는가
-- 무엇이 작동했고 무엇이 작동하지 않았는가
-- 미완료 항목은 무엇인가
-- 인사이트나 발견이 있었는가
+- 무엇을 발견하거나 배웠는가
+- 미완료 항목이 있는가
 
-**3단계: 작업 유형별 추출**
+---
 
-`/task-start` 시 선언한 유형에 따라 추출 항목이 다릅니다.
+**3단계: frontmatter 자동 생성**
 
-**조직의 일:**
-`$KYTOS_DATA_DIR/org/[조직명]/log.md` 에 다음을 추가합니다:
-```markdown
-## YYYY-MM-DD — [작업 제목]
-**완료**: [실제로 완료된 것]
-**결정**: [내려진 결정]
-**패턴**: [작동한 것, 작동하지 않은 것]
-**다음**: [미완료 항목]
+`$KYTOS_DATA_DIR/individual/me.json`을 읽어 `short_id`를 가져옵니다.
+
+아래 항목을 채웁니다:
+
+| 항목 | 방법 |
+|------|------|
+| `id` | `{short_id}-{type앞글자}-{YYYYMMDD}-001` |
+| `date` | 오늘 날짜 |
+| `scope` | `/task-start` 선언값 |
+| `orgs` | `/task-start` 선언값 |
+| `type` | 대화 내용으로 추론: `insight` \| `learning` \| `decision` \| `log` |
+| `domains` | 대화 주제로 추론 (예: somatic, facilitation, tech, academic) |
+| `projects` | 언급된 프로젝트명으로 추론 |
+| `visibility` | 기본값 `private` |
+
+---
+
+**4단계: 확인 요청 (한 번만)**
+
+추론한 내용을 보여주고 한 번에 확인받습니다:
+
+```
+📋 세션 요약
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[세션에서 일어난 일 2-3줄 요약]
+
+기록될 frontmatter:
+  type:       insight
+  scope:      individual_to_org
+  orgs:       [바디템플]
+  domains:    [somatic, facilitation]
+  projects:   [에스테틱댄스-프로그램]
+  visibility: private  ← shared로 바꾸려면 알려주세요
+
+맞으면 enter, 고칠 것이 있으면 말씀해 주세요.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-**개인→조직:**
-`$KYTOS_DATA_DIR/individual/insights/YYYY-MM-DD.md` 를 생성하고:
+사용자가 수정을 요청하면 반영합니다. 그냥 넘어가면 그대로 진행합니다.
+
+---
+
+**5단계: 파일 작성**
+
+작업 유형에 따라 파일을 씁니다.
+
+**scope: individual 또는 individual_to_org**
+
+`$KYTOS_DATA_DIR/individual/insights/YYYY-MM-DD.md` 생성:
+
 ```markdown
 ---
+id: {id}
 date: YYYY-MM-DD
-tags: [조직명, 주제태그]
-type: personal_to_org
+type: {type}
+scope: {scope}
+orgs: {orgs}
+domains: {domains}
+projects: {projects}
+visibility: {visibility}
 ---
-## 인사이트
-[세션에서 발견한 것]
 
-## 조직 연결 가능성
-[이것이 조직에 어떻게 기여될 수 있는가]
+## 세션 요약
+{무엇을 했는가}
+
+## 인사이트 / 결정 / 학습
+{추출된 내용}
+
+## 다음
+{미완료 항목 또는 이어질 것}
 ```
-그리고 `$KYTOS_DATA_DIR/org/[조직명]/insights/` 에 링크(파일명)를 기록합니다.
 
-**개인의 일:**
-`$KYTOS_DATA_DIR/individual/log.md` 에만 간단히 기록합니다. org에는 아무것도 기록하지 않습니다.
+`individual_to_org`이면 추가로 `$KYTOS_DATA_DIR/org/{조직명}/insights/index.md`에 링크 한 줄 추가:
+```
+- [[../../individual/insights/YYYY-MM-DD]] — {한줄 요약}
+```
 
-**4단계: 파일 업데이트**
+**scope: org**
 
-위에서 정리한 내용을 Read 후 Write/Edit 도구로 파일에 씁니다.
+`$KYTOS_DATA_DIR/org/{조직명}/log.md`에 항목 추가:
 
-**5단계: git 커밋**
+```markdown
+## YYYY-MM-DD — {작업 제목}
+**완료**: {실제로 완료된 것}
+**결정**: {내려진 결정}
+**패턴**: {작동한 것, 작동하지 않은 것}
+**다음**: {미완료 항목}
+```
+
+---
+
+**6단계: git 커밋**
 
 ```bash
 cd $KYTOS_DATA_DIR
@@ -66,23 +127,23 @@ git add -A
 git diff --staged --stat
 ```
 
-변경 파일을 확인한 후 커밋합니다:
+변경 파일을 확인한 후:
 
 ```bash
 git commit -m "$(cat <<'EOF'
-[조직명|개인]: [무엇을 했는지] — [핵심 인사이트 또는 결정]
+{scope}: {작업 제목 한줄} — {핵심 인사이트 또는 결정}
 
 Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
 EOF
 )"
 ```
 
-커밋 후 결과를 사용자에게 보여줍니다:
+완료 후:
 
 ```
-✓ 태스크 종료
+✓ 커밋 완료
 ━━━━━━━━━━━━━━━━━━━━━
-업데이트된 파일: [파일명들]
-커밋: [커밋 해시 앞 7자]
+파일: {파일명}
+커밋: {해시 앞 7자}
 ━━━━━━━━━━━━━━━━━━━━━
 ```

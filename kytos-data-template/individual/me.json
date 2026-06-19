@@ -1,6 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/spiratus-org/kytos-os/main/schema/individual-node.json",
   "id": "did:kytos:YOUR_NAME",
+  "short_id": "xxx",
   "name": "이름",
   "role": "역할 또는 직함",
   "orgs": [
@@ -13,5 +14,5 @@
   ],
   "created": "YYYY-MM-DD",
   "data_location": "individual://",
-  "note": "이 파일은 나의 Individual Node 정체성 선언입니다. 공개 여부는 제가 결정합니다."
+  "note": "short_id는 파일 id 자동생성에 쓰입니다. 팀 내에서 고유한 2-3자 약어로 설정하세요 (예: bsy, jsh, kmj)."
 }

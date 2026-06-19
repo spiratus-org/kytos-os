@@ -1,17 +1,49 @@
 # Kytos OS — 설치 가이드
 
-팀원이 Kytos OS를 처음 설정하는 절차입니다.
-따라하면 `/task-start`, `/task-end` 스킬이 작동하는 상태가 됩니다.
+이 가이드를 따라하면 `/task-start`, `/task-end` 스킬이 작동하는 상태가 됩니다.
 
-예상 소요 시간: **10분**
+예상 소요 시간: **15분**
 
 ---
 
-## 전제조건
+## 전제조건 설치
 
-- [Claude Code](https://claude.ai/code) 설치됨
-- Git 설치됨
-- (선택) [Obsidian](https://obsidian.md) 설치됨
+### Claude Code
+
+Kytos OS의 AI 레이어입니다. 반드시 필요합니다.
+
+1. [claude.ai](https://claude.ai) 계정 생성 (없으면)
+2. Node.js가 없다면 먼저 설치합니다: [nodejs.org](https://nodejs.org) → LTS 버전
+3. 터미널에서 Claude Code 설치:
+   ```bash
+   npm install -g @anthropic-ai/claude-code
+   ```
+4. 로그인:
+   ```bash
+   claude
+   ```
+   처음 실행하면 브라우저가 열리고 계정 연동이 진행됩니다.
+
+### Git
+
+버전 관리 도구입니다. macOS에는 대부분 기본 설치되어 있습니다.
+
+```bash
+git --version
+```
+
+명령이 없다면:
+```bash
+xcode-select --install
+```
+
+### GitHub 계정
+
+kytos-data 프라이빗 레포 보관에 필요합니다. [github.com](https://github.com)에서 계정을 만드세요.
+
+### Obsidian (선택)
+
+지식망을 시각적으로 탐색하고 싶다면 설치합니다. [obsidian.md](https://obsidian.md)
 
 ---
 
@@ -53,12 +85,19 @@ git commit -m "초기 설정"
 
 ### 3-2. GitHub에 프라이빗 레포 생성 후 연결
 
-GitHub에서 프라이빗 레포를 만들고 연결합니다 (이름 예: `kytos-data`).
+1. [github.com/new](https://github.com/new) 접속
+2. Repository name: `kytos-data`
+3. **Private** 선택 (반드시)
+4. "Create repository" 클릭
+5. 터미널에서 연결:
 
 ```bash
-git remote add origin https://github.com/[USERNAME]/kytos-data.git
+cd ~/kytos-data
+git remote add origin https://github.com/[내GitHub아이디]/kytos-data.git
 git push -u origin main
 ```
+
+`[내GitHub아이디]` 부분을 본인 GitHub 아이디로 바꿉니다.
 
 ---
 
@@ -90,10 +129,41 @@ echo $KYTOS_DATA_DIR
 나의 Individual Node 정체성을 선언합니다.
 
 ```bash
-open ~/kytos-data/individual/me.json
+open -e ~/kytos-data/individual/me.json
 ```
 
-`YOUR_NAME`과 `ORG_NAME` 등을 실제 값으로 바꿉니다. `id`는 팀 내에서 고유하면 됩니다.
+다음 항목을 채웁니다:
+
+| 항목 | 설명 | 예시 |
+|------|------|------|
+| `id` | 나를 식별하는 고유 id | `"did:kytos:김지수"` |
+| `short_id` | 파일 id 자동 생성용 2-3자 약어. 팀 내에서 고유해야 합니다 | `"jsk"` |
+| `name` | 이름 | `"김지수"` |
+| `role` | 역할 | `"퍼실리테이터"` |
+| `orgs` | 소속 조직 목록. 여러 개면 항목을 복사해 추가합니다 | 아래 참조 |
+
+소속 조직이 여러 개라면:
+```json
+"orgs": [
+  {
+    "id": "did:kytos:org:bodytemple",
+    "name": "바디템플",
+    "joined": "2026-06-19",
+    "permission": "open"
+  },
+  {
+    "id": "did:kytos:org:hyunhyeon",
+    "name": "현현",
+    "joined": "2026-06-19",
+    "permission": "open"
+  }
+]
+```
+
+저장 후 터미널에서 확인:
+```bash
+cat ~/kytos-data/individual/me.json
+```
 
 ---
 
@@ -105,7 +175,13 @@ Obsidian에서 **기존 볼트 열기** → `~/kytos-data/individual/vault/` 선
 
 ## 완료
 
-이제 Claude Code에서 사용할 수 있습니다:
+터미널에서 Claude Code를 실행합니다:
+
+```bash
+claude
+```
+
+이제 다음 명령을 사용할 수 있습니다:
 
 ```
 /task-start 바디템플 프로그램 설명 페이지 작성
@@ -113,7 +189,15 @@ Obsidian에서 **기존 볼트 열기** → `~/kytos-data/individual/vault/` 선
 /task-end
 ```
 
-`/task-end`가 세션을 정리하고 `~/kytos-data`에 자동으로 커밋합니다.
+`/task-start`는 작업 컨텍스트를 선언하고, `/task-end`는 세션을 정리해 `~/kytos-data`에 자동으로 커밋합니다.
+
+### 잘 됐는지 확인
+
+`/task-end` 후 다음 명령으로 커밋이 생겼는지 확인합니다:
+
+```bash
+cd ~/kytos-data && git log --oneline -3
+```
 
 ---
 

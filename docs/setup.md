@@ -41,9 +41,9 @@ xcode-select --install
 
 kytos-data 프라이빗 레포 보관에 필요합니다. [github.com](https://github.com)에서 계정을 만드세요.
 
-### Obsidian (선택)
+### Obsidian
 
-지식망을 시각적으로 탐색하고 싶다면 설치합니다. [obsidian.md](https://obsidian.md)
+지식망을 시각적으로 탐색하는 도구입니다. [obsidian.md](https://obsidian.md)에서 다운로드 후 설치합니다.
 
 ---
 
@@ -167,9 +167,54 @@ cat ~/kytos-data/individual/me.json
 
 ---
 
-## 6단계 — Obsidian 볼트 열기 (선택)
+## 6단계 — Obsidian 볼트 열기 및 Git 동기화 설정
 
-Obsidian에서 **기존 볼트 열기** → `~/kytos-data/individual/vault/` 선택.
+Obsidian 볼트(`~/kytos-data/individual/vault/`)는 kytos-data 레포 안에 있습니다.
+Git 플러그인을 설정하면 Obsidian에서 작성한 노트가 자동으로 커밋·동기화됩니다.
+
+### 6-1. 볼트 열기
+
+Obsidian 실행 → **기존 볼트 열기(Open folder as vault)** → `~/kytos-data/individual/vault/` 선택.
+
+볼트 안 폴더 구조:
+
+```
+vault/
+├── notes/      ← 자유 영역. 규칙 없이 아무렇게나 씁니다.
+├── inbox/      ← 생태계에 넣고 싶은 노트를 여기로 옮깁니다.
+└── imported/   ← /kytos-import 처리가 끝난 노트가 보관됩니다.
+```
+
+**노트를 생태계에 편입하는 방법**
+
+Obsidian에서 작성한 노트를 kytosOS 생태계(`individual/insights/`)에 넣고 싶을 때:
+
+1. 해당 노트를 `inbox/` 폴더로 옮깁니다
+2. Claude Code에서 `/kytos-import` 실행
+3. Claude가 내용을 읽고 frontmatter를 생성해 제안합니다
+4. 확인하면 자동으로 편입 및 커밋됩니다
+
+직접 frontmatter를 작성할 필요가 없습니다. 넣고 싶은 것만 `inbox/`로 옮기면 됩니다.
+
+### 6-2. Obsidian Git 플러그인 설치
+
+1. Obsidian 설정(⚙️) → **Community plugins**
+2. **안전 모드 끄기(Turn off safe mode)** → 확인
+3. **Browse** 클릭 → `Obsidian Git` 검색 → **Install** → **Enable**
+
+### 6-3. 플러그인 설정
+
+Obsidian 설정 → **Obsidian Git** 항목에서:
+
+| 항목 | 값 | 설명 |
+|------|-----|------|
+| Auto commit interval | `10` | 10분마다 변경사항 자동 커밋 |
+| Auto pull interval | `10` | 10분마다 원격에서 최신 내용 pull |
+| Commit message | `vault: auto-sync {{date}}` | 자동 커밋 메시지 |
+| Pull on startup | 켜기 | 볼트 열 때 최신 상태로 시작 |
+
+설정 후 Obsidian에서 작성한 노트는 10분 간격으로 `~/kytos-data`에 자동 커밋됩니다.
+`/task-end` 호출 시에는 세션 인사이트와 함께 한 번 더 명시적으로 커밋됩니다.
 
 ---
 

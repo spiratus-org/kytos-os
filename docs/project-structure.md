@@ -94,13 +94,19 @@ LIVING ORG OS PROJECT
 │             ├── ✓ 생태 모델 통합 (개인의 융성 → 전체 풍요)
 │             └── → 소마틱 / 4E Cognition 연결 (추후)
 │
-├── 2. PROTOTYPE                          → 미정
+├── 2. PROTOTYPE                          → 진행 중
 │   ├── 2-1  스키마 v0.1 — JSON 초안
 │   ├── 2-2  AI 해석 레이어 — 프롬프트 체계
-│   │         └── kytos-[조직명] shell command 구현
-│   │         └── /task-start / /task-end 스킬 구현
+│   │         ├── ✓ /task-start 스킬 구현
+│   │         ├── ✓ /task-end 스킬 구현 (frontmatter 자동 생성 + git 커밋)
+│   │         ├── ✓ /kytos-import 스킬 구현 (개인 노트 생태계 편입)
+│   │         └── → kytos-[조직명] shell command 구현
 │   ├── 2-3  바디템플 / 현현에 직접 적용하며 검증
 │   └── 2-4  kytos-data-template 배포 및 팀 온보딩
+│             ├── ✓ kytos-data-template 구조 설계 (vault 3구역 포함)
+│             ├── ✓ install.sh 배포 스크립트
+│             ├── ✓ docs/setup.md 완성
+│             └── → 팀원 실제 온보딩 테스트
 │
 ├── 3. MVP RELEASE                        → 미정
 │   ├── 3-1  README + 철학 문서 정비
@@ -110,7 +116,12 @@ LIVING ORG OS PROJECT
 └── 4. ECOSYSTEM                          → 미정
     ├── 4-1  커뮤니티 채널
     ├── 4-2  사례 조직 온보딩
-    └── 4-3  Mycelium Network 형성
+    ├── 4-3  Mycelium Network 형성
+    └── 4-4  식별자 레지스트리 설계
+              → M6(오픈소스 배포) 전에 필요
+              → 형태: git 레지스트리 (kytos-os/registry/, PR로 등록)
+              → DB 불필요 — 도메인 기반 또는 git 목록으로 충분
+              → 현재는 팀 관례(did:kytos:이름)로 운영
 ```
 
 ---
@@ -163,6 +174,8 @@ OS 이름              Kytos는 가제. 아직 확정되지 않았다.
 Org Node 스키마      무엇을 최소한으로 담는가. 지금 설계 시작.
 Individual Node      Org Node 이후 설계.
 태그·권한·크레딧     스키마 설계 후 연결 시스템 설계.
+식별자 고유성        현재: 팀 관례로 운영. M6 전에 git 레지스트리 설계 필요.
+                     did:kytos: 메서드 스펙 결정 (도메인 기반 권장).
 가격 정책            상업적 라이센스 비용 구조 미정.
 거버넌스             커뮤니티 의사결정 구조 미설계.
 ```

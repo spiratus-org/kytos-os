@@ -123,6 +123,7 @@ bash ~/git/kytos-os/install.sh
 설치되는 스킬 목록:
 - `/kytos-setup` — 최초 설정 (me.json 인터뷰 방식 작성)
 - `/kytos-open` — 세션 시작 (git pull + 마지막 세션 요약)
+- `/kytos-update` — kytos-os 업데이트 (git pull + 스킬 재설치)
 - `/task-start` — 작업 시작
 - `/task-end` — 작업 종료 + 자동 커밋
 - `/kytos-import` — 개인 노트 생태계 편입

@@ -8,17 +8,37 @@
 
 ## 전제조건 설치
 
+### Node.js 설치 (npm 포함)
+
+Claude Code 설치에 필요합니다. 먼저 설치되어 있는지 확인합니다:
+
+```bash
+node --version
+```
+
+숫자(`v20.x.x` 등)가 나오면 이미 설치된 것입니다. → 다음 단계로 건너뜁니다.
+
+`command not found`가 나오면:
+
+1. [nodejs.org](https://nodejs.org) 접속
+2. **LTS** 버튼 클릭 → `.pkg` 파일 다운로드
+3. 다운받은 파일 더블클릭 → 설치 마법사 따라 진행 (계속 → 동의 → 설치)
+4. 설치 완료 후 **터미널을 새로 열고** 확인:
+   ```bash
+   node --version   # v20.x.x 등 숫자가 나오면 성공
+   npm --version    # 숫자가 나오면 성공
+   ```
+
 ### Claude Code
 
 Kytos OS의 AI 레이어입니다. 반드시 필요합니다.
 
 1. [claude.ai](https://claude.ai) 계정 생성 (없으면)
-2. Node.js가 없다면 먼저 설치합니다: [nodejs.org](https://nodejs.org) → LTS 버전
-3. 터미널에서 Claude Code 설치:
+2. 터미널에서 설치:
    ```bash
    npm install -g @anthropic-ai/claude-code
    ```
-4. 로그인:
+3. 로그인:
    ```bash
    claude
    ```

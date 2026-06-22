@@ -226,15 +226,23 @@ Obsidian 설정 → **Obsidian Git** 항목에서:
 claude
 ```
 
-이제 다음 명령을 사용할 수 있습니다:
+### 매일 이렇게 씁니다
 
 ```
-/task-start 바디템플 프로그램 설명 페이지 작성
+/kytos-open                            ← 하루 시작할 때 한 번만
+                                          (git pull + 마지막 세션 요약)
+
+/task-start 바디템플 프로그램 설명 작성  ← 작업 시작
+... 작업 진행 ...
+/task-end                              ← 작업 종료 + 자동 커밋
+
+/task-start 다른 작업                  ← 같은 세션에서 바로 다음 작업
 ... 작업 진행 ...
 /task-end
 ```
 
-`/task-start`는 작업 컨텍스트를 선언하고, `/task-end`는 세션을 정리해 `~/kytos-data`에 자동으로 커밋합니다.
+`/kytos-open`은 최신 데이터를 받아오고 이전 세션에서 이어서 할 것을 보여줍니다.
+`/task-end`는 세션을 정리해 `~/kytos-data`에 자동으로 커밋합니다.
 
 ### 잘 됐는지 확인
 

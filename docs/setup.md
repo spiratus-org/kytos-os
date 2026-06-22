@@ -18,16 +18,38 @@ node --version
 
 숫자(`v20.x.x` 등)가 나오면 이미 설치된 것입니다. → 다음 단계로 건너뜁니다.
 
-`command not found`가 나오면:
+`command not found`가 나오면 Homebrew로 설치합니다.
 
-1. [nodejs.org](https://nodejs.org) 접속
-2. **LTS** 버튼 클릭 → `.pkg` 파일 다운로드
-3. 다운받은 파일 더블클릭 → 설치 마법사 따라 진행 (계속 → 동의 → 설치)
-4. 설치 완료 후 **터미널을 새로 열고** 확인:
-   ```bash
-   node --version   # v20.x.x 등 숫자가 나오면 성공
-   npm --version    # 숫자가 나오면 성공
-   ```
+**Homebrew 확인**
+
+```bash
+brew --version
+```
+
+숫자가 나오면 이미 있음 → Node.js 설치로 건너뜁니다.
+
+`command not found`가 나오면 Homebrew 먼저 설치합니다:
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+> 비밀번호를 입력하라고 나오면 Mac 로그인 비밀번호를 입력합니다.  
+> 입력해도 화면에 글자가 보이지 않는 것이 정상입니다.
+
+**Node.js 설치**
+
+```bash
+brew install node
+```
+
+**설치 확인**
+
+```bash
+node --version && npm --version
+```
+
+두 줄 모두 숫자가 나오면 성공입니다.
 
 ### Claude Code
 

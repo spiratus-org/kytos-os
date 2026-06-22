@@ -121,6 +121,7 @@ bash ~/git/kytos-os/install.sh
 ```
 
 설치되는 스킬 목록:
+- `/kytos-setup` — 최초 설정 (me.json 인터뷰 방식 작성)
 - `/kytos-open` — 세션 시작 (git pull + 마지막 세션 요약)
 - `/task-start` — 작업 시작
 - `/task-end` — 작업 종료 + 자동 커밋
@@ -189,42 +190,17 @@ echo $KYTOS_DATA_DIR
 
 나의 Individual Node 정체성을 선언합니다.
 
+Claude Code를 실행하고 `/kytos-setup`을 입력합니다:
+
 ```bash
-open -e ~/kytos-data/individual/me.json
+claude
 ```
 
-다음 항목을 채웁니다:
-
-| 항목 | 설명 | 예시 |
-|------|------|------|
-| `id` | 나를 식별하는 고유 id | `"did:kytos:김지수"` |
-| `short_id` | 파일 id 자동 생성용 2-3자 약어. 팀 내에서 고유해야 합니다 | `"jsk"` |
-| `name` | 이름 | `"김지수"` |
-| `role` | 역할 | `"퍼실리테이터"` |
-| `orgs` | 소속 조직 목록. 여러 개면 항목을 복사해 추가합니다 | 아래 참조 |
-
-소속 조직이 여러 개라면:
-```json
-"orgs": [
-  {
-    "id": "did:kytos:org:bodytemple",
-    "name": "바디템플",
-    "joined": "2026-06-19",
-    "permission": "open"
-  },
-  {
-    "id": "did:kytos:org:hyunhyeon",
-    "name": "현현",
-    "joined": "2026-06-19",
-    "permission": "open"
-  }
-]
+```
+/kytos-setup
 ```
 
-저장 후 터미널에서 확인:
-```bash
-cat ~/kytos-data/individual/me.json
-```
+Claude가 이름, 역할, 소속 조직을 하나씩 물어보고 자동으로 `me.json`을 작성해줍니다. JSON을 직접 편집할 필요가 없습니다.
 
 ---
 

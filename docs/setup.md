@@ -4,6 +4,9 @@
 
 예상 소요 시간: **15분**
 
+> **macOS 버전 요구사항: 26.2 이상**
+> 낮은 버전이면 애플 로고 → 시스템 설정 → 일반 → 소프트웨어 업데이트에서 먼저 업데이트하세요.
+
 ---
 
 ## 전제조건 설치
@@ -18,7 +21,17 @@ node --version
 
 숫자(`v20.x.x` 등)가 나오면 이미 설치된 것입니다. → 다음 단계로 건너뜁니다.
 
-`command not found`가 나오면 Homebrew로 설치합니다.
+`command not found`가 나오면 아래 순서로 설치합니다.
+
+**Xcode Command Line Tools 설치**
+
+Homebrew보다 먼저 필요합니다:
+
+```bash
+xcode-select --install
+```
+
+팝업이 뜨면 **설치** 클릭. 완료 후 계속 진행합니다.
 
 **Homebrew 확인**
 

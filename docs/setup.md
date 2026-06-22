@@ -120,7 +120,13 @@ git clone https://github.com/spiratus-org/kytos-os.git ~/git/kytos-os
 bash ~/git/kytos-os/install.sh
 ```
 
-설치 후 Claude Code를 재시작하면 `/task-start`, `/task-end` 명령이 활성화됩니다.
+설치되는 스킬 목록:
+- `/kytos-open` — 세션 시작 (git pull + 마지막 세션 요약)
+- `/task-start` — 작업 시작
+- `/task-end` — 작업 종료 + 자동 커밋
+- `/kytos-import` — 개인 노트 생태계 편입
+
+**설치 후 Claude Code를 완전히 종료했다가 다시 실행해야** 스킬이 활성화됩니다.
 
 ---
 
@@ -299,9 +305,17 @@ claude
 `/kytos-open`은 최신 데이터를 받아오고 이전 세션에서 이어서 할 것을 보여줍니다.
 `/task-end`는 세션을 정리해 `~/kytos-data`에 자동으로 커밋합니다.
 
-### 잘 됐는지 확인
+### 설치 완료 확인
 
-`/task-end` 후 다음 명령으로 커밋이 생겼는지 확인합니다:
+Claude Code에서 다음을 실행합니다:
+
+```
+/kytos-open
+```
+
+이름과 마지막 세션 요약이 뜨면 모든 설정이 완료된 것입니다.
+
+`/task-end` 후 커밋이 생겼는지 확인하려면:
 
 ```bash
 cd ~/kytos-data && git log --oneline -3

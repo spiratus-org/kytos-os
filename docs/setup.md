@@ -96,9 +96,10 @@ xcode-select --install
 
 kytos-data 프라이빗 레포 보관에 필요합니다. [github.com](https://github.com)에서 계정을 만드세요.
 
-### Obsidian
+### Obsidian (선택)
 
-지식망을 시각적으로 탐색하는 도구입니다. [obsidian.md](https://obsidian.md)에서 다운로드 후 설치합니다.
+마크다운 노트를 작성하는 데 사용할 수 있습니다. 필수는 아닙니다.
+노트 탐색과 연결 분석은 Claude Code(AI)가 담당합니다.
 
 ---
 
@@ -205,54 +206,36 @@ Claude가 이름, 역할, 소속 조직을 하나씩 물어보고 자동으로 `
 
 ---
 
-## 6단계 — Obsidian 볼트 열기 및 Git 동기화 설정
+## 6단계 — 노트 작성 구조 이해
 
-Obsidian 볼트(`~/kytos-data/individual/vault/`)는 kytos-data 레포 안에 있습니다.
-Git 플러그인을 설정하면 Obsidian에서 작성한 노트가 자동으로 커밋·동기화됩니다.
-
-### 6-1. 볼트 열기
-
-Obsidian 실행 → **기존 볼트 열기(Open folder as vault)** → `~/kytos-data/individual/vault/` 선택.
-
-볼트 안 폴더 구조:
+kytos-data의 노트는 두 종류입니다.
 
 ```
-vault/
-├── notes/      ← 자유 영역. 규칙 없이 아무렇게나 씁니다.
-├── inbox/      ← 생태계에 넣고 싶은 노트를 여기로 옮깁니다.
-└── imported/   ← /kytos-import 처리가 끝난 노트가 보관됩니다.
+$KYTOS_DATA_DIR/
+├── nodes/           ← 지식 조각. 마크다운으로 자유롭게 씁니다.
+├── connections/     ← 노드 간 관계. AI가 자동 생성합니다.
+├── individual/
+│   ├── me.json      ← 나의 정체성 선언
+│   └── memory/      ← AI가 축적하는 나에 대한 기억
+└── org/
+    └── [조직명]/
+        ├── nodes/   ← 조직 공유 지식
+        └── memory/  ← 조직 기억
 ```
 
-**노트를 생태계에 편입하는 방법**
+**노트를 쓰는 방법**
 
-Obsidian에서 작성한 노트를 kytosOS 생태계(`individual/insights/`)에 넣고 싶을 때:
+`nodes/` 폴더에 마크다운 파일을 만들면 됩니다. 어떤 에디터로 써도 됩니다.
+연결(connections/)은 Claude Code가 내용을 읽고 자동으로 발견합니다.
 
-1. 해당 노트를 `inbox/` 폴더로 옮깁니다
+**기존 노트를 가져오는 방법**
+
+다른 곳에서 작성한 노트를 생태계에 편입하고 싶을 때:
+
+1. 해당 파일을 `$KYTOS_DATA_DIR/nodes/`로 옮깁니다
 2. Claude Code에서 `/kytos-import` 실행
 3. Claude가 내용을 읽고 frontmatter를 생성해 제안합니다
-4. 확인하면 자동으로 편입 및 커밋됩니다
-
-직접 frontmatter를 작성할 필요가 없습니다. 넣고 싶은 것만 `inbox/`로 옮기면 됩니다.
-
-### 6-2. Obsidian Git 플러그인 설치
-
-1. Obsidian 설정(⚙️) → **Community plugins**
-2. **안전 모드 끄기(Turn off safe mode)** → 확인
-3. **Browse** 클릭 → `Obsidian Git` 검색 → **Install** → **Enable**
-
-### 6-3. 플러그인 설정
-
-Obsidian 설정 → **Obsidian Git** 항목에서:
-
-| 항목 | 값 | 설명 |
-|------|-----|------|
-| Auto commit interval | `10` | 10분마다 변경사항 자동 커밋 |
-| Auto pull interval | `10` | 10분마다 원격에서 최신 내용 pull |
-| Commit message | `vault: auto-sync {{date}}` | 자동 커밋 메시지 |
-| Pull on startup | 켜기 | 볼트 열 때 최신 상태로 시작 |
-
-설정 후 Obsidian에서 작성한 노트는 10분 간격으로 `~/kytos-data`에 자동 커밋됩니다.
-`/task-end` 호출 시에는 세션 인사이트와 함께 한 번 더 명시적으로 커밋됩니다.
+4. 확인하면 자동으로 커밋됩니다
 
 ---
 
@@ -295,7 +278,7 @@ Claude Code에서 다음을 실행합니다:
 `/task-end` 후 커밋이 생겼는지 확인하려면:
 
 ```bash
-cd ~/kytos-data && git log --oneline -3
+cd $KYTOS_DATA_DIR && git log --oneline -3
 ```
 
 ---

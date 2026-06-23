@@ -1,0 +1,158 @@
+{
+  "$schema": "https://kytos.org/schema/vocabulary/v1",
+  "description": "Kytos OS 관계 어휘 명세서. DB 식별자와 의미 정의, 표준 매핑, 레이블을 분리 관리한다.",
+  "namespace": "kytos",
+  "base_uri": "https://kytos.org/vocab/relation/",
+  "did_method": "did:kytos",
+  "relations": {
+    "generates": {
+      "id": "kytos:generates",
+      "definition": "A가 B를 존재하게 한다. A 없이는 B가 없다. 필연적 인과.",
+      "direction": "directed",
+      "natural_principle": "인과율. 씨앗이 나무를 만든다. DNA가 단백질을 만든다.",
+      "standard_mapping": {
+        "prov": "prov:wasDerivedFrom",
+        "note": "prov:wasDerivedFrom은 방향이 반대 (B wasDerivedFrom A). 의미는 근접."
+      },
+      "labels": {
+        "ko": "생성한다",
+        "ecological": "씨앗→나무",
+        "academic": "원인→결과",
+        "human": "부모→자식",
+        "organization": "비전→전략"
+      }
+    },
+    "enables": {
+      "id": "kytos:enables",
+      "definition": "A가 B를 가능하게 한다. A는 소비되지 않는다. B는 A 없이도 다른 경로로 존재할 수 있다.",
+      "direction": "directed",
+      "natural_principle": "촉매. 균사가 나무의 양분 흡수를 가능하게 한다. 리보솜이 번역을 가능하게 한다.",
+      "standard_mapping": {
+        "note": "직접 대응하는 W3C 표준 없음. kytos 신규 정의."
+      },
+      "labels": {
+        "ko": "가능하게 한다",
+        "ecological": "균사→나무",
+        "academic": "선행 연구→후속 연구",
+        "human": "스승→제자",
+        "organization": "인프라→서비스"
+      }
+    },
+    "contains": {
+      "id": "kytos:contains",
+      "definition": "A가 B를 내부에 담는다. 부분-전체 관계. A가 사라지면 B의 맥락도 사라진다.",
+      "direction": "directed",
+      "natural_principle": "부분-전체. 세포가 DNA를 담는다. 생태계가 종을 담는다.",
+      "standard_mapping": {
+        "schema": "schema:hasPart",
+        "skos": "skos:narrower (역방향)",
+        "note": "schema:hasPart와 직접 대응."
+      },
+      "labels": {
+        "ko": "포함한다",
+        "ecological": "생태계→종",
+        "academic": "이론→개념",
+        "human": "조직→개인",
+        "organization": "프로젝트→태스크"
+      }
+    },
+    "is_instance_of": {
+      "id": "kytos:is_instance_of",
+      "definition": "A는 B의 구체적 실현이다. A는 특수, B는 보편.",
+      "direction": "directed",
+      "natural_principle": "유형-사례. 이 소나무는 소나무 종의 사례다.",
+      "standard_mapping": {
+        "rdf": "rdf:type",
+        "note": "rdf:type과 완전 일치."
+      },
+      "labels": {
+        "ko": "의 사례다",
+        "ecological": "이 소나무→소나무",
+        "academic": "실험→이론",
+        "human": "배서영→인간",
+        "organization": "이 세션→세션 유형"
+      }
+    },
+    "becomes": {
+      "id": "kytos:becomes",
+      "definition": "A가 B로 변환된다. A는 원래 형태로 사라지고 B가 된다. 정보는 보존되고 형태가 바뀐다.",
+      "direction": "directed",
+      "natural_principle": "상전이. 물→얼음. 애벌레→나비. 가설→이론.",
+      "standard_mapping": {
+        "note": "직접 대응하는 W3C 표준 없음. kytos 신규 정의."
+      },
+      "labels": {
+        "ko": "가 된다",
+        "ecological": "애벌레→나비",
+        "academic": "가설→이론",
+        "human": "학생→스승",
+        "organization": "아이디어→제품"
+      }
+    },
+    "amplifies": {
+      "id": "kytos:amplifies",
+      "definition": "A가 B의 강도, 영향력, 존재감을 증가시킨다.",
+      "direction": "directed",
+      "natural_principle": "증폭. 양성 피드백. 공명의 단방향 발현.",
+      "standard_mapping": {
+        "note": "직접 대응하는 W3C 표준 없음. kytos 신규 정의."
+      },
+      "labels": {
+        "ko": "증폭한다",
+        "ecological": "햇빛→광합성",
+        "academic": "증거→주장",
+        "human": "지지→자신감",
+        "organization": "피드백→성과"
+      }
+    },
+    "inhibits": {
+      "id": "kytos:inhibits",
+      "definition": "A가 B의 강도, 영향력, 존재감을 감소시킨다.",
+      "direction": "directed",
+      "natural_principle": "억제. 음성 피드백. 면역계가 병원체를 억제한다.",
+      "standard_mapping": {
+        "note": "직접 대응하는 W3C 표준 없음. kytos 신규 정의."
+      },
+      "labels": {
+        "ko": "억제한다",
+        "ecological": "포식자→피식자",
+        "academic": "반증→가설",
+        "human": "두려움→행동",
+        "organization": "관료제→혁신"
+      }
+    },
+    "entangles_with": {
+      "id": "kytos:entangles_with",
+      "definition": "A와 B가 상호 결합되어 있다. 한쪽의 변화가 다른 쪽에 영향을 미친다. 방향 없음.",
+      "direction": "bidirectional",
+      "natural_principle": "얽힘. 양자 얽힘. 공생 관계. 생태계 내 상호의존.",
+      "standard_mapping": {
+        "note": "직접 대응하는 W3C 표준 없음. kytos 신규 정의."
+      },
+      "labels": {
+        "ko": "와 얽혀있다",
+        "ecological": "종간 공생",
+        "academic": "상호 의존하는 이론",
+        "human": "공생 파트너",
+        "organization": "상호의존 팀"
+      }
+    },
+    "contradicts": {
+      "id": "kytos:contradicts",
+      "definition": "A와 B는 동시에 참일 수 없다. 논리적 배타. 방향 없음.",
+      "direction": "bidirectional",
+      "natural_principle": "배타적 점유. 같은 공간에 두 상태가 동시에 존재할 수 없음. 파울리 배타 원리.",
+      "standard_mapping": {
+        "owl": "owl:disjointWith",
+        "note": "owl:disjointWith는 클래스에 한정. 일반 노드 간에는 kytos 정의 사용."
+      },
+      "labels": {
+        "ko": "와 모순된다",
+        "ecological": "두 포식자의 영역 충돌",
+        "academic": "상호 반박하는 이론",
+        "human": "양립 불가능한 가치관",
+        "organization": "상충하는 전략"
+      }
+    }
+  }
+}

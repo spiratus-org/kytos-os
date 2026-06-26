@@ -293,24 +293,25 @@ cd $KYTOS_DATA_DIR && git log --oneline -3
 
 ---
 
-## 조직 참여 설정
+## 조직 협업 설정
 
-팀 레포를 `KYTOS_DATA_DIR`로 설정해 조직 작업을 함께 합니다.
+개인 레포(`KYTOS_DATA_DIR`)는 그대로 유지하고, 공유 레포(`KYTOS_ORG_DIR`)를 추가로 설정합니다.
+`/task-end` 실행 시 두 레포에 동시에 커밋됩니다.
 
-### 팀 레포 클론
+### 공유 레포 클론
 
-팀 관리자로부터 레포 주소를 받아 클론합니다.
+팀 관리자로부터 초대를 수락한 후 클론합니다.
 
 ```bash
-git clone https://github.com/[조직명]/[팀명]-data.git ~/[팀명]-data
+git clone https://github.com/[조직명]/[공유레포명].git ~/git/[공유레포명]
 ```
 
-### 환경변수 전환
+### 환경변수 추가
 
-`~/.zshrc`에서 `KYTOS_DATA_DIR`을 팀 레포로 변경합니다.
+`~/.zshrc`에 `KYTOS_ORG_DIR`을 추가합니다. `KYTOS_DATA_DIR`은 그대로 유지합니다.
 
 ```bash
-export KYTOS_DATA_DIR=$HOME/[팀명]-data
+export KYTOS_ORG_DIR=$HOME/git/[공유레포명]
 ```
 
 적용합니다.
@@ -319,15 +320,12 @@ export KYTOS_DATA_DIR=$HOME/[팀명]-data
 source ~/.zshrc
 ```
 
-### me.json 설정
+확인합니다.
 
-팀 레포에는 개인 설정이 없습니다. `/kytos-setup`으로 내 정보를 작성합니다.
-
+```bash
+echo $KYTOS_DATA_DIR   # → 개인 레포 경로
+echo $KYTOS_ORG_DIR    # → 공유 레포 경로
 ```
-/kytos-setup
-```
-
-me.json은 `.gitignore`에 의해 로컬에만 저장됩니다. 팀원과 공유되지 않습니다.
 
 ### 확인
 
@@ -335,7 +333,7 @@ me.json은 `.gitignore`에 의해 로컬에만 저장됩니다. 팀원과 공유
 /kytos-open
 ```
 
-팀 로그와 함께 시작되면 완료입니다.
+이름과 마지막 세션 요약이 뜨면 완료입니다. 이후 `/task-end` 실행 시 개인·공유 레포에 동시 커밋됩니다.
 
 ---
 

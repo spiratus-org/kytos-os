@@ -9,11 +9,11 @@ kytos-data를 처음 설정할 때 한 번만 실행합니다.
 **1단계: 환경 확인**
 
 ```bash
-echo $KYTOS_INDIVIDUAL_DIR
+echo $KYTOS_DIR
 ```
 
 비어 있으면 멈추고 안내합니다:
-> `KYTOS_INDIVIDUAL_DIR` 환경변수가 설정되지 않았습니다.
+> `KYTOS_DIR` 환경변수가 설정되지 않았습니다.
 > `docs/setup.md`의 4단계를 따라 설정한 뒤 다시 실행해주세요.
 
 ---
@@ -21,13 +21,13 @@ echo $KYTOS_INDIVIDUAL_DIR
 **2단계: 기존 me.json 확인**
 
 ```bash
-cat $KYTOS_INDIVIDUAL_DIR/individual/me.json
+cat $KYTOS_DIR/individual/me.json
 ```
 
 `id`가 `did:kytos:YOUR_NAME` 그대로면 아직 작성 전 → 인터뷰 진행.
 이미 작성되어 있으면:
 > `me.json`이 이미 작성되어 있습니다.
-> 수정하려면 `$KYTOS_INDIVIDUAL_DIR/individual/me.json`을 직접 편집하거나 계속 진행하려면 enter를 누르세요.
+> 수정하려면 `$KYTOS_DIR/individual/me.json`을 직접 편집하거나 계속 진행하려면 enter를 누르세요.
 
 enter면 인터뷰 진행, 다른 입력이면 종료.
 
@@ -116,7 +116,7 @@ enter면 제안값 사용, 입력이 있으면 그 값 사용.
 
 **5단계: me.json 저장**
 
-확인이 완료되면 Write 도구로 `$KYTOS_INDIVIDUAL_DIR/individual/me.json`을 저장합니다.
+확인이 완료되면 Write 도구로 `$KYTOS_DIR/individual/me.json`을 저장합니다.
 
 `$schema`와 `note` 필드는 템플릿 원본 그대로 유지합니다.
 
@@ -125,7 +125,7 @@ enter면 제안값 사용, 입력이 있으면 그 값 사용.
 **6단계: git 커밋**
 
 ```bash
-cd $KYTOS_INDIVIDUAL_DIR
+cd $KYTOS_DIR
 git add individual/me.json
 git commit -m "$(cat <<'EOF'
 init: me.json 초기 설정

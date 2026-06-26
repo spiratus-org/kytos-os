@@ -20,14 +20,14 @@ kytos-data/               ← 개인 전용 프라이빗 레포
     └── vault/                Obsidian 볼트
 ```
 
-조직 데이터는 별도의 공유 레포(`KYTOS_ORG_DIR`)에서 관리합니다.
+조직 데이터는 별도의 공유 레포(`KYTOS_DIR`)에서 관리합니다.
 
 ---
 
 ## 데이터 주권
 
 - 이 레포 안의 모든 것은 내가 소유합니다
-- 조직 공유 데이터는 `KYTOS_ORG_DIR`로 분리되어 있습니다
+- 조직 공유 데이터는 `KYTOS_DIR`로 분리되어 있습니다
 - 언제든 공유를 철회할 수 있습니다
 
 ---
@@ -37,13 +37,13 @@ kytos-data/               ← 개인 전용 프라이빗 레포
 이 레포를 clone한 후 환경변수를 설정합니다:
 
 ```bash
-export KYTOS_INDIVIDUAL_DIR=~/kytos-data
+export KYTOS_DIR=~/kytos-data
 ```
 
 조직 협업 시 공유 레포도 함께 설정합니다:
 
 ```bash
-export KYTOS_ORG_DIR=~/[조직명]-org-data
+export KYTOS_DIR=~/[조직명]-org-data
 ```
 
 `me.json`은 `/kytos-setup`으로 작성합니다.

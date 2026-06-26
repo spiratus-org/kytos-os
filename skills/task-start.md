@@ -8,12 +8,11 @@ $ARGUMENTS 를 바탕으로 태스크를 시작합니다.
 
 Bash 도구로 확인합니다:
 ```bash
-echo $KYTOS_INDIVIDUAL_DIR
-echo $KYTOS_ORG_DIR
+echo $KYTOS_DIR
 ```
 
-`KYTOS_INDIVIDUAL_DIR`이 비어 있으면 작업을 멈추고 안내합니다:
-> `KYTOS_INDIVIDUAL_DIR` 환경변수가 설정되지 않았습니다.
+`KYTOS_DIR`이 비어 있으면 작업을 멈추고 안내합니다:
+> `KYTOS_DIR` 환경변수가 설정되지 않았습니다.
 > `docs/setup.md`의 3단계를 따라 설정해주세요.
 
 **2단계: 작업 유형 분류**
@@ -31,8 +30,8 @@ $ARGUMENTS 를 읽고 세 가지 중 하나로 분류합니다:
 **3단계: 관련 기억 로드**
 
 작업 유형에 따라 Read 도구로 컨텍스트를 로드합니다:
-- 조직의 일 / 개인→조직: `$KYTOS_ORG_DIR/org/[조직명]/memory/` 내 관련 파일 확인
-- 모든 유형: `$KYTOS_INDIVIDUAL_DIR/individual/memory/` 에서 관련 기억 확인
+- 조직의 일 / 개인→조직: `$KYTOS_DIR/org/[조직명]/memory/` 내 관련 파일 확인
+- 모든 유형: `$KYTOS_DIR/individual/memory/` 에서 관련 기억 확인
 
 **4단계: 선언**
 

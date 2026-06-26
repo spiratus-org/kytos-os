@@ -9,13 +9,10 @@ description: 태스크 종료 — 세션 추출, frontmatter 자동 생성, git 
 **1단계: 환경 확인**
 
 ```bash
-echo $KYTOS_INDIVIDUAL_DIR
-echo $KYTOS_ORG_DIR
+echo $KYTOS_DIR
 ```
 
-`KYTOS_INDIVIDUAL_DIR`이 비어 있으면 멈추고 안내합니다: `docs/setup.md`의 4단계를 따라 설정해주세요.
-
-`KYTOS_ORG_DIR`이 비어 있고 org 관련 작업이 있으면 안내합니다: 조직 데이터는 `docs/setup.md`의 5단계를 따라 `KYTOS_ORG_DIR`을 설정해야 공유 레포에 커밋됩니다.
+`KYTOS_DIR`이 비어 있으면 멈추고 안내합니다: `docs/setup.md`의 4단계를 따라 설정해주세요.
 
 ---
 
@@ -31,7 +28,7 @@ echo $KYTOS_ORG_DIR
 
 **3단계: frontmatter 자동 생성**
 
-`$KYTOS_INDIVIDUAL_DIR/individual/me.json`을 읽어 `short_id`를 가져옵니다.
+`$KYTOS_DIR/individual/me.json`을 읽어 `short_id`를 가져옵니다.
 
 아래 항목을 채웁니다:
 
@@ -79,7 +76,7 @@ echo $KYTOS_ORG_DIR
 
 **scope: individual**
 
-`$KYTOS_INDIVIDUAL_DIR/individual/insights/YYYY-MM-DD.md` 생성:
+`$KYTOS_DIR/individual/insights/YYYY-MM-DD.md` 생성:
 
 ```markdown
 ---
@@ -105,16 +102,16 @@ visibility: {visibility}
 
 **scope: individual_to_org**
 
-`$KYTOS_INDIVIDUAL_DIR/individual/insights/YYYY-MM-DD.md` 생성 (위와 동일).
+`$KYTOS_DIR/individual/insights/YYYY-MM-DD.md` 생성 (위와 동일).
 
-추가로 `$KYTOS_ORG_DIR/org/{조직명}/insights/index.md`에 링크 한 줄 추가:
+추가로 `$KYTOS_DIR/org/{조직명}/insights/index.md`에 링크 한 줄 추가:
 ```
 - {YYYY-MM-DD} [{한줄 요약}] — individual/insights/YYYY-MM-DD
 ```
 
 **scope: org**
 
-`$KYTOS_ORG_DIR/org/{조직명}/log.md`에 항목 추가:
+`$KYTOS_DIR/org/{조직명}/log.md`에 항목 추가:
 
 ```markdown
 ## YYYY-MM-DD — {작업 제목}
@@ -128,26 +125,10 @@ visibility: {visibility}
 
 **6단계: git 커밋**
 
-scope에 따라 커밋 대상이 달라집니다.
-
-**individual 데이터가 있을 때** (`scope: individual` 또는 `individual_to_org`):
+`individual/`은 `.gitignore`에 의해 자동으로 제외됩니다. org 데이터만 커밋됩니다.
 
 ```bash
-cd $KYTOS_INDIVIDUAL_DIR
-git add -A
-git diff --staged --stat
-git commit -m "$(cat <<'EOF'
-{scope}: {작업 제목 한줄} — {핵심 인사이트 또는 결정}
-
-Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
-EOF
-)"
-```
-
-**org 데이터가 있을 때** (`scope: org` 또는 `individual_to_org`) — `$KYTOS_ORG_DIR`이 설정된 경우에만:
-
-```bash
-cd $KYTOS_ORG_DIR
+cd $KYTOS_DIR
 git add -A
 git diff --staged --stat
 git commit -m "$(cat <<'EOF'
@@ -162,8 +143,8 @@ EOF
 
 ```
 ✓ 커밋 완료
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-개인: {KYTOS_INDIVIDUAL_DIR 커밋 해시 앞 7자} (또는 "없음")
-공유: {KYTOS_ORG_DIR 커밋 해시 앞 7자} (또는 "없음 — KYTOS_ORG_DIR 미설정")
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━
+커밋: {해시 앞 7자}
+파일: {변경된 파일명}
+━━━━━━━━━━━━━━━━━━━━━
 ```

@@ -9,11 +9,11 @@ description: 태스크 종료 — 세션 추출, frontmatter 자동 생성, git 
 **1단계: 환경 확인**
 
 ```bash
-echo $KYTOS_DATA_DIR
+echo $KYTOS_INDIVIDUAL_DIR
 echo $KYTOS_ORG_DIR
 ```
 
-`KYTOS_DATA_DIR`이 비어 있으면 멈추고 안내합니다: `docs/setup.md`의 4단계를 따라 설정해주세요.
+`KYTOS_INDIVIDUAL_DIR`이 비어 있으면 멈추고 안내합니다: `docs/setup.md`의 4단계를 따라 설정해주세요.
 
 `KYTOS_ORG_DIR`이 비어 있고 org 관련 작업이 있으면 안내합니다: 조직 데이터는 `docs/setup.md`의 5단계를 따라 `KYTOS_ORG_DIR`을 설정해야 공유 레포에 커밋됩니다.
 
@@ -31,7 +31,7 @@ echo $KYTOS_ORG_DIR
 
 **3단계: frontmatter 자동 생성**
 
-`$KYTOS_DATA_DIR/individual/me.json`을 읽어 `short_id`를 가져옵니다.
+`$KYTOS_INDIVIDUAL_DIR/individual/me.json`을 읽어 `short_id`를 가져옵니다.
 
 아래 항목을 채웁니다:
 
@@ -79,7 +79,7 @@ echo $KYTOS_ORG_DIR
 
 **scope: individual**
 
-`$KYTOS_DATA_DIR/individual/insights/YYYY-MM-DD.md` 생성:
+`$KYTOS_INDIVIDUAL_DIR/individual/insights/YYYY-MM-DD.md` 생성:
 
 ```markdown
 ---
@@ -105,7 +105,7 @@ visibility: {visibility}
 
 **scope: individual_to_org**
 
-`$KYTOS_DATA_DIR/individual/insights/YYYY-MM-DD.md` 생성 (위와 동일).
+`$KYTOS_INDIVIDUAL_DIR/individual/insights/YYYY-MM-DD.md` 생성 (위와 동일).
 
 추가로 `$KYTOS_ORG_DIR/org/{조직명}/insights/index.md`에 링크 한 줄 추가:
 ```
@@ -133,7 +133,7 @@ scope에 따라 커밋 대상이 달라집니다.
 **individual 데이터가 있을 때** (`scope: individual` 또는 `individual_to_org`):
 
 ```bash
-cd $KYTOS_DATA_DIR
+cd $KYTOS_INDIVIDUAL_DIR
 git add -A
 git diff --staged --stat
 git commit -m "$(cat <<'EOF'
@@ -163,7 +163,7 @@ EOF
 ```
 ✓ 커밋 완료
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-개인: {KYTOS_DATA_DIR 커밋 해시 앞 7자} (또는 "없음")
+개인: {KYTOS_INDIVIDUAL_DIR 커밋 해시 앞 7자} (또는 "없음")
 공유: {KYTOS_ORG_DIR 커밋 해시 앞 7자} (또는 "없음 — KYTOS_ORG_DIR 미설정")
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

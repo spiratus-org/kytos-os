@@ -37,7 +37,7 @@ kytos-data/               ← 개인 전용 프라이빗 레포
 이 레포를 clone한 후 환경변수를 설정합니다:
 
 ```bash
-export KYTOS_DATA_DIR=~/kytos-data
+export KYTOS_INDIVIDUAL_DIR=~/kytos-data
 ```
 
 조직 협업 시 공유 레포도 함께 설정합니다:

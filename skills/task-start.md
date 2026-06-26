@@ -9,6 +9,7 @@ $ARGUMENTS 를 바탕으로 태스크를 시작합니다.
 Bash 도구로 확인합니다:
 ```bash
 echo $KYTOS_DATA_DIR
+echo $KYTOS_ORG_DIR
 ```
 
 `KYTOS_DATA_DIR`이 비어 있으면 작업을 멈추고 안내합니다:
@@ -30,7 +31,7 @@ $ARGUMENTS 를 읽고 세 가지 중 하나로 분류합니다:
 **3단계: 관련 기억 로드**
 
 작업 유형에 따라 Read 도구로 컨텍스트를 로드합니다:
-- 조직의 일 / 개인→조직: `$KYTOS_DATA_DIR/org/[조직명]/memory/` 내 관련 파일 확인
+- 조직의 일 / 개인→조직: `$KYTOS_ORG_DIR/org/[조직명]/memory/` 내 관련 파일 확인 (`KYTOS_ORG_DIR` 미설정 시 `$KYTOS_DATA_DIR/org/[조직명]/memory/` 폴백)
 - 모든 유형: `$KYTOS_DATA_DIR/individual/memory/` 에서 관련 기억 확인
 
 **4단계: 선언**

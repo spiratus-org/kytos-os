@@ -10,9 +10,12 @@ description: 태스크 종료 — 세션 추출, frontmatter 자동 생성, git 
 
 ```bash
 echo $KYTOS_DATA_DIR
+echo $KYTOS_ORG_DIR
 ```
 
-비어 있으면 멈추고 안내합니다: `docs/setup.md`의 4단계를 따라 설정해주세요.
+`KYTOS_DATA_DIR`이 비어 있으면 멈추고 안내합니다: `docs/setup.md`의 4단계를 따라 설정해주세요.
+
+`KYTOS_ORG_DIR`이 비어 있고 org 관련 작업이 있으면 안내합니다: 조직 데이터는 `docs/setup.md`의 5단계를 따라 `KYTOS_ORG_DIR`을 설정해야 공유 레포에 커밋됩니다.
 
 ---
 
@@ -74,7 +77,7 @@ echo $KYTOS_DATA_DIR
 
 작업 유형에 따라 파일을 씁니다.
 
-**scope: individual 또는 individual_to_org**
+**scope: individual**
 
 `$KYTOS_DATA_DIR/individual/insights/YYYY-MM-DD.md` 생성:
 
@@ -83,7 +86,7 @@ echo $KYTOS_DATA_DIR
 id: {id}
 date: YYYY-MM-DD
 type: {type}
-scope: {scope}
+scope: individual
 orgs: {orgs}
 domains: {domains}
 projects: {projects}
@@ -100,14 +103,18 @@ visibility: {visibility}
 {미완료 항목 또는 이어질 것}
 ```
 
-`individual_to_org`이면 추가로 `$KYTOS_DATA_DIR/org/{조직명}/insights/index.md`에 링크 한 줄 추가:
+**scope: individual_to_org**
+
+`$KYTOS_DATA_DIR/individual/insights/YYYY-MM-DD.md` 생성 (위와 동일).
+
+추가로 `$KYTOS_ORG_DIR/org/{조직명}/insights/index.md`에 링크 한 줄 추가:
 ```
-- [[../../individual/insights/YYYY-MM-DD]] — {한줄 요약}
+- {YYYY-MM-DD} [{한줄 요약}] — individual/insights/YYYY-MM-DD
 ```
 
 **scope: org**
 
-`$KYTOS_DATA_DIR/org/{조직명}/log.md`에 항목 추가:
+`$KYTOS_ORG_DIR/org/{조직명}/log.md`에 항목 추가:
 
 ```markdown
 ## YYYY-MM-DD — {작업 제목}
@@ -121,15 +128,28 @@ visibility: {visibility}
 
 **6단계: git 커밋**
 
+scope에 따라 커밋 대상이 달라집니다.
+
+**individual 데이터가 있을 때** (`scope: individual` 또는 `individual_to_org`):
+
 ```bash
 cd $KYTOS_DATA_DIR
 git add -A
 git diff --staged --stat
+git commit -m "$(cat <<'EOF'
+{scope}: {작업 제목 한줄} — {핵심 인사이트 또는 결정}
+
+Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
+EOF
+)"
 ```
 
-변경 파일을 확인한 후:
+**org 데이터가 있을 때** (`scope: org` 또는 `individual_to_org`) — `$KYTOS_ORG_DIR`이 설정된 경우에만:
 
 ```bash
+cd $KYTOS_ORG_DIR
+git add -A
+git diff --staged --stat
 git commit -m "$(cat <<'EOF'
 {scope}: {작업 제목 한줄} — {핵심 인사이트 또는 결정}
 
@@ -142,8 +162,8 @@ EOF
 
 ```
 ✓ 커밋 완료
-━━━━━━━━━━━━━━━━━━━━━
-파일: {파일명}
-커밋: {해시 앞 7자}
-━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+개인: {KYTOS_DATA_DIR 커밋 해시 앞 7자} (또는 "없음")
+공유: {KYTOS_ORG_DIR 커밋 해시 앞 7자} (또는 "없음 — KYTOS_ORG_DIR 미설정")
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

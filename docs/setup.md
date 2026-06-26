@@ -173,6 +173,12 @@ git push -u origin main
 export KYTOS_DATA_DIR=$HOME/kytos-data
 ```
 
+조직 협업을 한다면 공유 레포도 추가합니다:
+
+```bash
+export KYTOS_ORG_DIR=$HOME/git/[공유레포이름]
+```
+
 적용합니다:
 
 ```bash
@@ -184,7 +190,11 @@ source ~/.zshrc
 ```bash
 echo $KYTOS_DATA_DIR
 # → /Users/[이름]/kytos-data
+echo $KYTOS_ORG_DIR
+# → /Users/[이름]/git/[공유레포이름]  (설정한 경우)
 ```
+
+`KYTOS_ORG_DIR`이 설정된 상태에서 `/task-end`를 실행하면 개인 레포와 공유 레포에 동시에 커밋됩니다.
 
 ---
 

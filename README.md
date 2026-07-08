@@ -1,3 +1,7 @@
+> **⚠️ 이 레포는 [kytos-os-spiratus](https://github.com/spiratus-org/kytos-os-spiratus)로 통합되었습니다 (2026-07-08).**
+> 스킬, 템플릿, 스키마, 철학 문서, 온보딩 가이드는 모두 kytos-os-spiratus에서 관리됩니다.
+> 이 레포는 기록 보존을 위해 아카이브 상태로 남습니다.
+
 # LIVING ORG OS PROJECT
 
 > 영혼이 생동하는 사람들이 자연스럽게 모이고 흘러가며,  

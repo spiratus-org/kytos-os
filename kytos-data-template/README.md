@@ -17,7 +17,11 @@ kytos-data/               ← 개인 전용 프라이빗 레포
     ├── memory/               학습과 기억
     ├── insights/             인사이트
     ├── contributions/        조직에 공유된 기여 목록
-    └── vault/                Obsidian 볼트
+    ├── vault/                Obsidian 볼트
+    ├── content-pool/         글의 원재료 (ContentFragment) — /kytos-import, 직접 작성
+    ├── atomic-pieces/        하나의 개념을 담은 완결된 글 (AtomicPiece) — /content-weave
+    ├── publications/         채널·의도별 파생본 (Publication) — /content-publish
+    └── connections/          위 항목들 사이의 관계 (ConnectionNode)
 ```
 
 조직 데이터는 별도의 공유 레포(`KYTOS_DIR`)에서 관리합니다.

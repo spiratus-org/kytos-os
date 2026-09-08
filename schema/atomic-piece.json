@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kytos.org/schema/atomic-piece/v1",
+  "title": "AtomicPiece",
+  "description": "텍스트 풀에서 여러 ContentFragment가 엮여 만들어진, 하나의 개념만 담은 완결된 글. 원자성이 있다 — 더 쪼개면 그 개념이 무너진다. 개인의 원본 채널(예: 개인 홈페이지)에 최초로 게시되며, 이후 여러 Publication으로 파생된다.",
+  "type": "object",
+  "required": ["id", "type", "owner", "title", "core_concept", "status", "tags", "visibility", "created_at"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^did:kytos:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+      "description": "전역 고유 식별자 (W3C DID 형식)"
+    },
+    "type": {
+      "const": "atomic-piece"
+    },
+    "owner": {
+      "type": "string",
+      "description": "작성자 id (did:kytos:{uuid})"
+    },
+    "title": {
+      "type": "string"
+    },
+    "core_concept": {
+      "type": "string",
+      "description": "이 글이 담은 단 하나의 개념/주장. 한두 문장으로 압축한다. 이게 흔들리면 원자성이 깨진 것이다."
+    },
+    "content": {
+      "type": "string",
+      "description": "본문. .md로 저장할 때는 파일 본문이 이 값을 대신한다."
+    },
+    "source_fragments": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "이 글을 엮은 ContentFragment id 목록. 편의상의 역참조 필드 — 근거·신뢰도까지 포함한 정식 계보는 relation:generates 의 ConnectionNode에 있다.",
+      "default": []
+    },
+    "origin_url": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "description": "개인 원본 채널에 게시된 주소 (예: baeseoyoung.com/...)",
+      "default": null
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "published"],
+      "default": "draft"
+    },
+    "tags": {
+      "$ref": "tag-set.json"
+    },
+    "visibility": {
+      "type": "string",
+      "pattern": "^(private|public|org:[a-z][a-z0-9-]*)$",
+      "examples": ["private", "public", "org:bodytemple"]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "published_at": {
+      "type": ["string", "null"],
+      "format": "date",
+      "default": null
+    }
+  },
+  "additionalProperties": false
+}

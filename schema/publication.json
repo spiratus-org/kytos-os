@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kytos.org/schema/publication/v1",
+  "title": "Publication",
+  "description": "AtomicPiece에 담긴 하나의 생각을, 목적과 채널에 맞는 형식으로 다시 펴낸 파생본. 형식(form)은 채널의 성격·의도에 따라 정해지며 사전에 고정되지 않는다.",
+  "type": "object",
+  "required": ["id", "type", "owner", "medium", "intent", "status", "tags", "visibility", "created_at"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^did:kytos:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+      "description": "전역 고유 식별자 (W3C DID 형식)"
+    },
+    "type": {
+      "const": "publication"
+    },
+    "owner": {
+      "type": "string",
+      "description": "작성자 id (did:kytos:{uuid})"
+    },
+    "derived_from": {
+      "type": ["string", "null"],
+      "pattern": "^did:kytos:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+      "description": "원본 AtomicPiece id. 편의상의 역참조 필드 — 정식 계보는 relation:generates 의 ConnectionNode에 있다.",
+      "default": null
+    },
+    "org": {
+      "type": ["string", "null"],
+      "description": "이 파생본이 속한 조직 (예: bodytemple, hyunhyun). 개인 채널에 낸 것이면 null.",
+      "default": null
+    },
+    "medium": {
+      "type": "string",
+      "enum": ["website", "blog", "instagram", "magazine", "info-sheet", "newsletter", "other"],
+      "description": "게시 매체."
+    },
+    "intent": {
+      "type": "string",
+      "enum": ["origin", "healing-support", "research-context", "commercial-marketing", "other"],
+      "description": "이 파생본을 만든 의도. origin: 개인 원본 그 자체 · healing-support: 치유적 활동을 뒷받침 · research-context: 창작/활동의 배경 리서치 · commercial-marketing: 상업 활동의 마케팅"
+    },
+    "format": {
+      "type": ["string", "null"],
+      "description": "구체적 형식. intent·채널에 따라 나중에 정해도 된다.",
+      "default": null
+    },
+    "url": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "default": null
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "published"],
+      "default": "draft"
+    },
+    "tags": {
+      "$ref": "tag-set.json"
+    },
+    "visibility": {
+      "type": "string",
+      "pattern": "^(private|public|org:[a-z][a-z0-9-]*)$",
+      "examples": ["private", "public", "org:bodytemple"]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "published_at": {
+      "type": ["string", "null"],
+      "format": "date",
+      "default": null
+    }
+  },
+  "additionalProperties": false
+}

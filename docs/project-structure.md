@@ -82,9 +82,11 @@ LIVING ORG OS PROJECT
 │   │         └── ✓ Task 라이프사이클: /task-start → /task-end
 │   │
 │   ├── 1-3  핵심 스키마 설계            → 진행 중
+│   │         ├── ✓ 콘텐츠 파이프라인 스키마 — ContentFragment / AtomicPiece / Publication
+│   │         │     (Individual Node의 첫 실사례. → docs/content-pipeline.md)
+│   │         ├── ✓ 태그 시스템 스키마 (TagSet — keywords/orgs/domains/tone)
 │   │         ├── → Org Node 스키마 (JSON)     ← 지금 시작
-│   │         ├── → Individual Node 스키마 (JSON)
-│   │         ├── → 태그 시스템 스키마
+│   │         ├── → Individual Node 컨테이너 스키마 (JSON) — me.json이 이미 참조 중
 │   │         ├── → 권한 시스템 (open/close/invite-only)
 │   │         └── → 크레딧 시스템 스키마
 │   │
@@ -100,6 +102,8 @@ LIVING ORG OS PROJECT
 │   │         ├── ✓ /task-start 스킬 구현
 │   │         ├── ✓ /task-end 스킬 구현 (frontmatter 자동 생성 + git 커밋)
 │   │         ├── ✓ /kytos-import 스킬 구현 (개인 노트 생태계 편입)
+│   │         ├── ✓ /content-weave 스킬 구현 (조각 → AtomicPiece)
+│   │         ├── ✓ /content-publish 스킬 구현 (AtomicPiece → Publication)
 │   │         └── → kytos-[조직명] shell command 구현
 │   ├── 2-3  바디템플 / 현현에 직접 적용하며 검증
 │   └── 2-4  kytos-data-template 배포 및 팀 온보딩
@@ -193,8 +197,15 @@ Individual Node      Org Node 이후 설계.
 | `docs/network-graph.json` | ✓ | 네트워크 구조 (기계 처리용) |
 | `schema/org-node.json` | → | 설계 시작 예정 |
 | `schema/individual-node.json` | → | Org Node 이후 |
+| `schema/tag-set.json` | ✓ | 태그 시스템 스키마 |
+| `schema/content-fragment.json` | ✓ | 콘텐츠 파이프라인 — 원재료 조각 |
+| `schema/atomic-piece.json` | ✓ | 콘텐츠 파이프라인 — 완결된 글 |
+| `schema/publication.json` | ✓ | 콘텐츠 파이프라인 — 채널별 파생본 |
+| `docs/content-pipeline.md` | ✓ | 콘텐츠 파이프라인 설계 문서 |
 | `skills/task-start.md` | ✓ | 태스크 시작 스킬 |
 | `skills/task-end.md` | ✓ | 태스크 종료 + git 커밋 스킬 |
+| `skills/content-weave.md` | ✓ | 조각 → AtomicPiece 스킬 |
+| `skills/content-publish.md` | ✓ | AtomicPiece → Publication 스킬 |
 | `kytos-data-template/` | ✓ | 개인 데이터 레포 템플릿 (Obsidian 볼트 포함) |
 | `install.sh` | ✓ | 스킬 설치 스크립트 |
 | `docs/setup.md` | ✓ | 설치 및 온보딩 가이드 |

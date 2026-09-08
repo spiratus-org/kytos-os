@@ -1,0 +1,12 @@
+{
+  "id": "did:kytos:00000000-0000-0000-0000-000000000000",
+  "type": "connection",
+  "source": "did:kytos:{content-fragment-id 또는 atomic-piece-id}",
+  "target": "did:kytos:{atomic-piece-id 또는 publication-id}",
+  "relation": "generates",
+  "owner": "did:kytos:{내 id}",
+  "confidence": null,
+  "visibility": "private",
+  "created_at": "YYYY-MM-DDTHH:MM:SSZ",
+  "note": "조각들이 엮여 atomic-piece가 될 때, atomic-piece가 publication으로 파생될 때 모두 relation: generates 를 쓴다. 스키마: schema/connection-node.json"
+}

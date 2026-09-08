@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kytos.org/schema/content-fragment/v1",
+  "title": "ContentFragment",
+  "description": "개인에게서 흘러나온 글의 최소 단위. 아직 완결되지 않은 원재료. 태깅되어 텍스트 풀에 쌓이고, 나중에 다른 조각들과 엮여 AtomicPiece가 된다.",
+  "type": "object",
+  "required": ["id", "type", "owner", "content", "tags", "status", "visibility", "created_at"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "전역 고유 식별자 (W3C DID 형식)",
+      "pattern": "^did:kytos:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+      "examples": ["did:kytos:550e8400-e29b-41d4-a716-446655440000"]
+    },
+    "type": {
+      "const": "content-fragment",
+      "description": "노드 타입 식별자"
+    },
+    "owner": {
+      "type": "string",
+      "description": "작성자 id (did:kytos:{uuid})"
+    },
+    "content": {
+      "type": "string",
+      "description": "원문 텍스트. .md로 저장할 때는 frontmatter 대신 파일 본문이 이 값을 대신한다."
+    },
+    "source": {
+      "type": "string",
+      "description": "이 조각이 흘러나온 경로.",
+      "examples": ["journal", "voice-memo", "conversation", "obsidian-inbox", "social-post-draft"],
+      "default": ""
+    },
+    "tags": {
+      "$ref": "tag-set.json"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["raw", "pooled", "woven", "archived"],
+      "description": "raw: 막 들어옴, 태깅 전 · pooled: 태깅되어 풀에 안착 · woven: AtomicPiece로 엮여 들어감 · archived: 더 이상 쓰이지 않음",
+      "default": "raw"
+    },
+    "visibility": {
+      "type": "string",
+      "pattern": "^(private|public|org:[a-z][a-z0-9-]*)$",
+      "description": "접근 권한. private | public | org:{조직명}",
+      "examples": ["private", "public", "org:bodytemple"]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "기록 시간"
+    },
+    "note": {
+      "type": "string",
+      "description": "자유 메모",
+      "default": ""
+    }
+  },
+  "additionalProperties": false
+}

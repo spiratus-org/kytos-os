@@ -135,6 +135,43 @@ EOF
 )"
 ```
 
+`individual/`은 `.gitignore`로 제외되어 있으므로 이 커밋에는 `me.json`이 실제로 올라가지 않습니다. 팀 레포에는 흔적을 남기지 않는 것이 의도된 동작입니다 (개인 데이터는 개인 소유).
+
+---
+
+**7단계: 개인 백업 레포 연결 (선택)**
+
+`individual/`은 지금 이 컴퓨터에만 있고 어디에도 백업되지 않습니다. 사용자 본인 소유의 GitHub 레포에 연결하면, 이후 `/task-end`가 개인 인사이트·메모리를 그 레포에 자동으로 커밋·푸시합니다. 팀 레포와는 완전히 분리된, 본인만 접근 가능한 레포입니다.
+
+```
+개인 기록을 본인 GitHub 레포에 자동 백업할까요?
+연결하려면 레포 URL을 입력해주세요 (예: https://github.com/{본인계정}/{레포명}.git).
+레포가 아직 없으면 GitHub에서 빈 프라이빗 레포를 먼저 만들어주세요.
+건너뛰려면 enter — 개인 데이터는 이 컴퓨터에만 로컬로 남습니다.
+>
+```
+
+URL이 입력되면:
+
+```bash
+cd $KYTOS_DIR/individual
+git init -q
+git remote add origin {URL}
+git add -A
+git commit -m "$(cat <<'EOF'
+init: 개인 데이터 초기화
+
+Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
+EOF
+)"
+git branch -M main
+git push -u origin main
+```
+
+push 실패 시 (인증 오류, 레포가 비어있지 않음 등) git 용어 없이 원인과 다음 행동을 안내합니다. 성공하면 연결된 레포 URL을 `individual/.kytos-remote`에 한 줄로 저장해 다음 세션에서도 참조할 수 있게 합니다 (이 파일도 개인 데이터이므로 커밋 대상).
+
+건너뛴 경우 이후 `/task-end`는 개인 커밋 단계를 건너뛰고 로컬에만 기록합니다.
+
 완료:
 
 ```

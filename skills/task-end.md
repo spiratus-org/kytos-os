@@ -125,7 +125,11 @@ visibility: {visibility}
 
 **6단계: git 커밋**
 
-`individual/`은 `.gitignore`에 의해 자동으로 제외됩니다. org 데이터만 커밋됩니다.
+org 데이터와 개인 데이터는 서로 다른 레포에 속하므로 나눠서 커밋합니다.
+
+**6-1. org 커밋 (팀 공유 레포)**
+
+`individual/`은 `.gitignore`에 의해 자동으로 제외됩니다. org·shared-resource 변경분만 커밋합니다.
 
 ```bash
 cd $KYTOS_DIR
@@ -137,14 +141,44 @@ git commit -m "$(cat <<'EOF'
 Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
 EOF
 )"
+git pull --rebase origin main
+git push origin main
 ```
+
+커밋할 org 변경이 없으면(순수 `scope: individual` 세션) 이 단계는 건너뜁니다.
+
+**6-2. 개인 커밋 (개인 백업 레포, 연결된 경우에만)**
+
+```bash
+test -d "$KYTOS_DIR/individual/.git" && echo has-remote || echo no-remote
+```
+
+`has-remote`인 경우에만 진행합니다:
+
+```bash
+cd $KYTOS_DIR/individual
+git add -A
+git diff --staged --stat
+git commit -m "$(cat <<'EOF'
+{scope}: {작업 제목 한줄} — {핵심 인사이트 또는 결정}
+
+Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
+EOF
+)"
+git pull --rebase origin main
+git push origin main
+```
+
+`no-remote`이면 개인 커밋 단계는 건너뜁니다 — `/kytos-setup`에서 개인 백업 레포를 아직 연결하지 않은 상태이므로, 로컬 파일만 남기고 조용히 넘어갑니다 (매번 안내하지 않음).
+
+push 실패(네트워크, 충돌 등) 시 org 커밋 정책과 동일하게 처리합니다: 로그/인사이트는 append 위주이므로 양쪽 내용을 보존하며 병합, force-push 금지, 복구 불가능하면 멈추고 평이한 한국어로 안내.
 
 완료 후:
 
 ```
 ✓ 커밋 완료
 ━━━━━━━━━━━━━━━━━━━━━
-커밋: {해시 앞 7자}
-파일: {변경된 파일명}
+org:      {해시 앞 7자} — {변경된 파일명} (또는 "변경 없음")
+individual: {해시 앞 7자} — {변경된 파일명} (또는 "레포 미연결 — 로컬만 저장됨")
 ━━━━━━━━━━━━━━━━━━━━━
 ```

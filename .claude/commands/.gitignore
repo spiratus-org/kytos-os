@@ -1,0 +1,3 @@
+# 세션 시작 훅(.claude/hooks/session-start.sh)이 skills/*.md에서 매번 복사해 채운다.
+# 소스는 skills/ 디렉터리이므로 여기 생성물은 커밋하지 않는다.
+*.md

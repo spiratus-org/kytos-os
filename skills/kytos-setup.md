@@ -130,7 +130,7 @@ git add individual/me.json
 git commit -m "$(cat <<'EOF'
 init: me.json 초기 설정
 
-Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
+Co-Authored-By: {이 세션에서 실행 중인 Claude 모델명} <noreply@anthropic.com>
 EOF
 )"
 ```

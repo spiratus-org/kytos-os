@@ -134,7 +134,7 @@ git diff --staged --stat
 git commit -m "$(cat <<'EOF'
 {scope}: {작업 제목 한줄} — {핵심 인사이트 또는 결정}
 
-Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
+Co-Authored-By: {이 세션에서 실행 중인 Claude 모델명} <noreply@anthropic.com>
 EOF
 )"
 ```

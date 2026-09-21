@@ -97,7 +97,7 @@ git diff --staged --stat
 git commit -m "$(cat <<'EOF'
 kytos-import: {편입된 파일 수}개 노트 생태계 편입
 
-Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
+Co-Authored-By: {이 세션에서 실행 중인 Claude 모델명} <noreply@anthropic.com>
 EOF
 )"
 ```
